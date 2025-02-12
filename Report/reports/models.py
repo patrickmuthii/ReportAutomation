@@ -1,28 +1,16 @@
 from django.db import models
 
-# Create your models here.
 class Report(models.Model):
-    title = models.CharField(max_length=200)
-    content = models.TextField()
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    title_number = models.CharField(max_length=255, blank=True, null=True)
+    owner = models.CharField(max_length=255, blank=True, null=True)
+    inspection_date = models.DateField(default='2000-01-01')
+    Cordinates = models.CharField(default=0, max_length=50)
+    land_size = models.CharField(default=0, max_length=50)
+    market_value = models.DecimalField(default=0, max_digits=15, decimal_places=2)
+    mortgage_value = models.DecimalField(default=0, max_digits=15, decimal_places=2)
+    forced_sale_value = models.DecimalField(default=0, max_digits=15, decimal_places=2)
+    reserve_value = models.DecimalField(default=0,  max_digits=15, decimal_places=2)
+    remarks = models.TextField(blank=True, null=True)
 
     def __str__(self):
-        return self.title
-    
-class Comment(models.Model):
-    report = models.ForeignKey(Report, on_delete=models.CASCADE)
-    content = models.TextField()
-
-    def __str__(self):
-        return self.content    
-
-
-class data(models.Model):
-    title = models.CharField(max_length=200)
-    content = models.TextField()
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return self.title
+        return f"Report: {self.title_number}"
